@@ -61,7 +61,7 @@ mongoose.connect(uri, { useUnifiedTopology: true })
                 "city":"mumbra",
                 "state":"maha"
              },
-             "images": [
+             "images": [ 
                 "img1",
                 "img2"
              ],
@@ -143,9 +143,10 @@ mongoose.connect(uri, { useUnifiedTopology: true })
     })
 
     //get all profile
-    app.get('/profiles',async(req,res)=>{
+    app.get('/profiles', async(req,res)=>{
         const profiles = await Profile.find();
-        res.send(profiles)
+        console.log(profiles)
+        res.send(profiles).json(profiles.lenght !== 0 ? profiles : [])
     })
 
 // params dynamic cheezo ke data ko store kar ke rakh ta hai
@@ -164,7 +165,7 @@ app.post('/profileCreate/', async(req,res)=>{
     const profile = req.body;
     //create a new profile and save it to mongodb
     const newProfile = new Profile(profile);
-    await newProfile.save()
+    await newProfile.save ()
     const Profiles = await Profile.find ();
     // profiles.push(profile);
     res.status(200).json (profiles);
@@ -204,7 +205,7 @@ app.delete('/profileDelete/:id', async(req,res)=>{
     if(!profile){
         res.status(404).json ('Not found..');
     }
-    const profiles = await Profile.find();
+    const profiles = await Profile.find();  
     // profiles.splice(profileIndex,1)
     res.status(200).json(profiles);
 })
@@ -212,6 +213,8 @@ app.delete('/profileDelete/:id', async(req,res)=>{
 app.listen('8000',()=>{
     console.log('server is running on port 8000...')
 })
+
+
 
 //http methods
 
@@ -223,3 +226,33 @@ app.listen('8000',()=>{
 
 //delete -> delete data 
     
+// koi bhi chiz ko rukne ke liye await likh te hai 
+
+//async uska syntex hai
+
+// ye dono monogdb ke liye kaam karta hai
+
+// framework jo kaam bohot baar repeat hone wala hai to frameowrk usey assan karta hai or usme  
+
+// e.preventdefault a tag ke andar ke chizo ko rukana hai to use karta hai e.preventdefault
+// e ka full form event event function ka naam hai 
+
+//put and patch different 
+
+//put : jitna bhi bhi right me hai usko left me kardega 
+// patch : jitna chiz hai usko hi upadate kar renga 
+
+//wrapper : ek baar use kar sakta hu \
+//mixin : kitne baar bhi use karsakte hai 
+
+//schema : schema bata ta hai ke kitne database me kitne value jaane wale hai
+
+// absolute : hawa me udta hai  
+//relative : hawa me nhi udta hai ek hi jage pe rehta hai 
+
+
+
+ 
+
+
+
